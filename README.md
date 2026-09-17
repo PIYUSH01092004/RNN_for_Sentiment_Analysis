@@ -214,16 +214,15 @@ pip install torch scikit-learn nltk fastapi uvicorn pandas numpy
 python train_and_export.py
 ```
 
-### 4. Launch the FastAPI Server
+### 4. Launch the Local FastAPI Server
 ```bash
 python server.py
 ```
+Once started, access the local dashboard in your browser at: **[http://localhost:8000](http://localhost:8000)** (or `http://127.0.0.1:8000`)
 
-### 5. Access the Web Dashboard
-Open your web browser and navigate to:
+### 5. Access the Live Web Application (Cloud)
 - 🚀 **Live Production Application**: **[https://cinepulse-rnn-sentiment.onrender.com](https://cinepulse-rnn-sentiment.onrender.com)**
 - 🌐 **Live Interactive API Docs**: **[https://cinepulse-rnn-sentiment.onrender.com/docs](https://cinepulse-rnn-sentiment.onrender.com/docs)**
-- 💻 **Local Dashboard**: **[http://localhost:8000](http://localhost:8000)** *(available when `python server.py` is running)*
 
 ---
 
