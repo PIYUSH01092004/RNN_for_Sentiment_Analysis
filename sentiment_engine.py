@@ -4,10 +4,16 @@ import pickle
 import json
 import torch
 import torch.nn as nn
-from nltk.corpus import stopwords
-import nltk
-
-nltk.download('stopwords', quiet=True)
+try:
+    from nltk.corpus import stopwords
+    english_stopwords = set(stopwords.words("english"))
+except Exception:
+    try:
+        nltk.download('stopwords', quiet=True)
+        from nltk.corpus import stopwords
+        english_stopwords = set(stopwords.words("english"))
+    except Exception:
+        english_stopwords = {"i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you", "your", "yours", "he", "him", "his", "she", "her", "it", "its", "they", "them", "what", "which", "who", "whom", "this", "that", "these", "those", "am", "is", "are", "was", "were", "be", "been", "being", "have", "has", "had", "having", "do", "does", "did", "doing", "a", "an", "the", "and", "but", "if", "or", "because", "as", "until", "while", "of", "at", "by", "for", "with", "about", "against", "between", "into", "through", "during", "before", "after", "above", "below", "to", "from", "up", "down", "in", "out", "on", "off", "over", "under", "again", "further", "then", "once", "here", "there", "when", "where", "why", "how", "all", "any", "both", "each", "few", "more", "most", "other", "some", "such", "no", "nor", "not", "only", "own", "same", "so", "than", "too", "very", "s", "t", "can", "will", "just", "don", "should", "now"}
 
 class RNN(nn.Module):
     def __init__(self, input_size=5000, hidden_size=128, num_layers=1):
@@ -26,7 +32,7 @@ class RNN(nn.Module):
 class SentimentEngine:
     def __init__(self, model_path="rnn_model.pth", vectorizer_path="tfidf_vectorizer.pkl", meta_path="model_meta.json"):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.english_stopwords = set(stopwords.words("english"))
+        self.english_stopwords = english_stopwords
         self.model = None
         self.vectorizer = None
         self.metadata = {
