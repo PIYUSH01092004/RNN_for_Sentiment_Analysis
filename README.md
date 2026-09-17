@@ -7,7 +7,7 @@
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688?style=for-the-badge&logo=fastapi&logoColor=white)
 ![Scikit-Learn](https://img.shields.io/badge/scikit_learn-1.3+-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
 ![NLTK](https://img.shields.io/badge/NLTK-3.8+-150458?style=for-the-badge&logo=nltk&logoColor=white)
-![Render](https://img.shields.io/badge/Render-Deployed-46E3B7?style=for-the-badge&logo=render&logoColor=white)
+[![Render](https://img.shields.io/badge/Render-Live%20Demo-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://cinepulse-rnn-sentiment.onrender.com)
 ![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)
 
 <p align="center">
@@ -16,8 +16,9 @@
 </p>
 
 <p align="center">
-  🌐 <b>Local Web Application:</b> <a href="http://localhost:8000/" target="_blank">http://localhost:8000</a><br>
-  📖 <b>Interactive API Docs:</b> <a href="http://localhost:8000/docs" target="_blank">http://localhost:8000/docs</a>
+  🚀 <b>Live Web Application:</b> <a href="https://cinepulse-rnn-sentiment.onrender.com" target="_blank">https://cinepulse-rnn-sentiment.onrender.com</a><br>
+  🌐 <b>Live API Documentation:</b> <a href="https://cinepulse-rnn-sentiment.onrender.com/docs" target="_blank">https://cinepulse-rnn-sentiment.onrender.com/docs</a><br>
+  💻 <b>Local Web Application:</b> <a href="http://localhost:8000/" target="_blank">http://localhost:8000</a>
 </p>
 
 [Key Features](#key-features) •
@@ -220,8 +221,9 @@ python server.py
 ```
 
 ### 5. Access the Web Dashboard
-Open your web browser and navigate to:
-👉 **[http://localhost:8000](http://localhost:8000)** (or `http://127.0.0.1:8000`)
+- 🚀 **Live Production Application**: **[https://cinepulse-rnn-sentiment.onrender.com](https://cinepulse-rnn-sentiment.onrender.com)**
+- 🌐 **Live Interactive API Docs**: **[https://cinepulse-rnn-sentiment.onrender.com/docs](https://cinepulse-rnn-sentiment.onrender.com/docs)**
+- 💻 **Local Dashboard**: **[http://localhost:8000](http://localhost:8000)** (or `http://127.0.0.1:8000`)
 
 ---
 
