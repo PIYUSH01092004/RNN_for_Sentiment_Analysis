@@ -1,0 +1,8 @@
+{
+  "input_size": 5000,
+  "hidden_size": 128,
+  "num_layers": 1,
+  "test_accuracy": 84.9,
+  "total_dataset_size": 49582,
+  "training_samples": 25000
+}

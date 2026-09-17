@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CinePulse Hollywood — PyTorch Sentiment Intelligence</title>
+    <!-- Google Fonts: Playfair Display, Outfit & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Hollywood Gold Theme CSS -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <!-- Ambient Theater Glow -->
+    <div class="theater-background">
+        <div class="curtain-glow glow-gold"></div>
+        <div class="curtain-glow glow-spotlight"></div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-film"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title">CinePulse <span class="gold-text">Hollywood</span></span>
+                    <span class="brand-subtitle">AI Sentiment Engine • PyTorch SimpleRNN</span>
+                </div>
+            </div>
+            <div class="nav-stats">
+                <div class="stat-badge golden">
+                    <i class="fa-solid fa-clapperboard"></i>
+                    <span id="model-status-text">PyTorch RNN Live</span>
+                </div>
+                <div class="stat-badge star-acc">
+                    <i class="fa-solid fa-star"></i>
+                    <span>84.90% Accuracy</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-layout">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="gold-divider"><span>✦ 🎬 ✦</span></div>
+            <h1 class="hero-title">Movie Review <span class="gold-gradient-text">Sentiment Studio</span></h1>
+            <p class="hero-subtext">Deep Learning Sentiment Classification powered by PyTorch Recurrent Neural Network (50,000 IMDB Reviews)</p>
+        </section>
+
+        <!-- Navigation Tabs -->
+        <div class="tab-navigation">
+            <button class="tab-btn active" data-tab="single-analysis">
+                <i class="fa-solid fa-ticket"></i> Review Studio
+            </button>
+            <button class="tab-btn" data-tab="batch-analysis">
+                <i class="fa-solid fa-film"></i> Batch Screening
+            </button>
+            <button class="tab-btn" data-tab="pipeline-inspector">
+                <i class="fa-solid fa-sliders"></i> Preprocessing Lab
+            </button>
+            <button class="tab-btn" data-tab="model-architecture">
+                <i class="fa-solid fa-microchip"></i> Model Architecture
+            </button>
+        </div>
+
+        <!-- TAB 1: Single Review Studio -->
+        <div class="tab-content active" id="single-analysis">
+            <div class="grid-container">
+                <!-- Input Panel -->
+                <div class="card hollywood-card input-card">
+                    <div class="card-header">
+                        <h2><i class="fa-solid fa-pen-nib"></i> Review Script Input</h2>
+                        <span class="char-count" id="char-counter">0 characters</span>
+                    </div>
+
+                    <!-- Ticket Stub Presets -->
+                    <div class="presets-wrapper">
+                        <span class="presets-label"><i class="fa-solid fa-ticket-simple"></i> Ticket Stub Presets:</span>
+                        <div class="preset-buttons">
+                            <button class="preset-btn gold-stub" data-preset="positive1">🏆 Masterpiece</button>
+                            <button class="preset-btn red-stub" data-preset="negative1">💣 Box Office Flop</button>
+                            <button class="preset-btn amber-stub" data-preset="mixed">🤔 Mixed Critics</button>
+                            <button class="preset-btn gold-stub" data-preset="positive2">🍿 Sci-Fi Blockbuster</button>
+                            <button class="preset-btn red-stub" data-preset="negative2">😴 Dull Drama</button>
+                        </div>
+                    </div>
+
+                    <textarea id="review-input" placeholder="Type or paste a movie review script here... e.g. 'This film is a breathtaking visual spectacle with astounding performances and an unforgettable score!'" rows="7"></textarea>
+
+                    <div class="input-actions">
+                        <button class="btn btn-secondary" id="clear-btn">
+                            <i class="fa-solid fa-rotate-left"></i> Reset
+                        </button>
+                        <button class="btn btn-gold" id="analyze-btn">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Evaluate Verdict
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Prediction Output Panel -->
+                <div class="card hollywood-card output-card" id="output-panel">
+                    <div class="card-header">
+                        <h2><i class="fa-solid fa-award"></i> Critics Verdict</h2>
+                        <span class="badge-gold" id="confidence-badge">Awaiting Input</span>
+                    </div>
+
+                    <div class="result-placeholder" id="placeholder-view">
+                        <div class="placeholder-film-strip">
+                            <i class="fa-solid fa-video placeholder-icon"></i>
+                        </div>
+                        <p>Enter a movie review script and click <strong>Evaluate Verdict</strong> to generate real-time AI sentiment classification.</p>
+                    </div>
+
+                    <div class="result-view hidden" id="result-view">
+                        <!-- Hollywood Verdict Hero Badge -->
+                        <div class="sentiment-hero" id="sentiment-hero">
+                            <div class="sentiment-icon-container" id="sentiment-icon-box">
+                                <i class="fa-solid fa-trophy" id="sentiment-icon"></i>
+                            </div>
+                            <div class="sentiment-text-meta">
+                                <span class="sentiment-label" id="sentiment-result-text">CRITICS PICK</span>
+                                <span class="sentiment-sub" id="sentiment-subtext">High Confidence Prediction</span>
+                            </div>
+                        </div>
+
+                        <!-- Gauge Bar Meter -->
+                        <div class="gauge-container">
+                            <div class="gauge-bar-wrapper">
+                                <div class="gauge-bar-track">
+                                    <div class="gauge-bar-fill" id="gauge-fill" style="width: 50%;"></div>
+                                </div>
+                                <div class="gauge-labels">
+                                    <span class="neg-label"><i class="fa-solid fa-thumbs-down"></i> Flop (0%)</span>
+                                    <span class="pos-label"><i class="fa-solid fa-thumbs-up"></i> Blockbuster (100%)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Score Breakdown Grid -->
+                        <div class="score-breakdown-grid">
+                            <div class="score-box pos">
+                                <span class="score-title">Positive Rating</span>
+                                <span class="score-value" id="pos-score-val">0%</span>
+                            </div>
+                            <div class="score-box neg">
+                                <span class="score-title">Negative Rating</span>
+                                <span class="score-value" id="neg-score-val">0%</span>
+                            </div>
+                            <div class="score-box neutral">
+                                <span class="score-title">Confidence</span>
+                                <span class="score-value" id="confidence-val">0%</span>
+                            </div>
+                        </div>
+
+                        <!-- Recognized Vocabulary Tokens -->
+                        <div class="vocab-tokens-section">
+                            <h4><i class="fa-solid fa-tags"></i> Recognized Vocabulary Tokens:</h4>
+                            <div class="token-pills" id="token-pills-container">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: Batch Screening -->
+        <div class="tab-content" id="batch-analysis">
+            <div class="card hollywood-card">
+                <div class="card-header">
+                    <h2><i class="fa-solid fa-layer-group"></i> Batch Review Screening</h2>
+                    <p class="section-desc">Evaluate multiple movie reviews simultaneously for film festival or box-office dataset analysis.</p>
+                </div>
+                <textarea id="batch-input" placeholder="Enter movie reviews (one per line):&#10;1. Unbelievable masterpiece with thrilling action!&#10;2. Dreadful film, terrible acting and atrocious dialogue.&#10;3. Visually captivating with great cinematography." rows="6"></textarea>
+                <div class="input-actions">
+                    <button class="btn btn-gold" id="batch-analyze-btn">
+                        <i class="fa-solid fa-clapperboard"></i> Screen Batch Reviews
+                    </button>
+                </div>
+
+                <div class="batch-results-wrapper hidden" id="batch-results-wrapper">
+                    <div class="batch-summary-cards">
+                        <div class="summary-card total">
+                            <span class="num" id="batch-total-num">0</span>
+                            <span class="lbl">Total Screened</span>
+                        </div>
+                        <div class="summary-card pos">
+                            <span class="num" id="batch-pos-num">0</span>
+                            <span class="lbl">Positive Reviews</span>
+                        </div>
+                        <div class="summary-card neg">
+                            <span class="num" id="batch-neg-num">0</span>
+                            <span class="lbl">Negative Reviews</span>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="batch-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Review Script</th>
+                                    <th>Verdict</th>
+                                    <th>Confidence</th>
+                                    <th>Vocab Tokens Matched</th>
+                                </tr>
+                            </thead>
+                            <tbody id="batch-table-body">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: Preprocessing Inspector -->
+        <div class="tab-content" id="pipeline-inspector">
+            <div class="card hollywood-card">
+                <div class="card-header">
+                    <h2><i class="fa-solid fa-sliders"></i> NLP Preprocessing Pipeline Inspector</h2>
+                    <p class="section-desc">Step-by-step transformation breakdown as executed in <code>RNN_for Sentiment_Analysis.ipynb</code>.</p>
+                </div>
+
+                <div class="pipeline-stepper">
+                    <div class="pipeline-step">
+                        <div class="step-badge">Step 1</div>
+                        <div class="step-content">
+                            <h3><i class="fa-solid fa-font"></i> Lowercasing</h3>
+                            <p class="step-desc">Standardizing case for vocabulary normalization.</p>
+                            <div class="code-box" id="step1-code">Enter a review in Review Studio to view live step outputs...</div>
+                        </div>
+                    </div>
+
+                    <div class="pipeline-step">
+                        <div class="step-badge">Step 2</div>
+                        <div class="step-content">
+                            <h3><i class="fa-solid fa-filter"></i> Regex Cleaning</h3>
+                            <p class="step-desc">Stripping URLs (<code>http\S+</code>), HTML tags (<code>&lt;.*?&gt;</code>), and special symbols (<code>[^A-Za-z0-9\s]</code>).</p>
+                            <div class="code-box" id="step2-code">Waiting for analysis...</div>
+                        </div>
+                    </div>
+
+                    <div class="pipeline-step">
+                        <div class="step-badge">Step 3</div>
+                        <div class="step-content">
+                            <h3><i class="fa-solid fa-scissors"></i> NLTK Stopwords Filtering</h3>
+                            <p class="step-desc">Removing non-informative English stop words ('the', 'is', 'at', 'which').</p>
+                            <div class="code-box" id="step3-code">Waiting for analysis...</div>
+                        </div>
+                    </div>
+
+                    <div class="pipeline-step">
+                        <div class="step-badge">Step 4</div>
+                        <div class="step-content">
+                            <h3><i class="fa-solid fa-network-wired"></i> TF-IDF & PyTorch RNN Forward Pass</h3>
+                            <p class="step-desc">Vectorization (5,000 features) $\rightarrow$ PyTorch <code>nn.RNN(5000, 128)</code> $\rightarrow$ Linear FC $\rightarrow$ Sigmoid probability.</p>
+                            <div class="code-box" id="step4-code">Waiting for analysis...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: Model Architecture -->
+        <div class="tab-content" id="model-architecture">
+            <div class="card hollywood-card">
+                <div class="card-header">
+                    <h2><i class="fa-solid fa-microchip"></i> PyTorch SimpleRNN Architecture Specs</h2>
+                    <p class="section-desc">Technical implementation specs of the Deep Learning model trained on IMDB movie review dataset.</p>
+                </div>
+
+                <div class="arch-grid">
+                    <div class="arch-card">
+                        <div class="arch-icon"><i class="fa-solid fa-database"></i></div>
+                        <h3>Dataset</h3>
+                        <p>IMDB 50,000 Movie Reviews Dataset (Binary Sentiment Classification)</p>
+                    </div>
+                    <div class="arch-card">
+                        <div class="arch-icon"><i class="fa-solid fa-code"></i></div>
+                        <h3>Embedding</h3>
+                        <p>Scikit-Learn <code>TfidfVectorizer(max_features=5000)</code> Matrix</p>
+                    </div>
+                    <div class="arch-card">
+                        <div class="arch-icon"><i class="fa-solid fa-layer-group"></i></div>
+                        <h3>Neural Network</h3>
+                        <p>PyTorch <code>nn.RNN(input_size=5000, hidden_size=128, batch_first=True)</code></p>
+                    </div>
+                    <div class="arch-card">
+                        <div class="arch-icon"><i class="fa-solid fa-star"></i></div>
+                        <h3>Evaluation Accuracy</h3>
+                        <p><strong>84.90% Accuracy</strong> on Test Evaluation Set</p>
+                    </div>
+                </div>
+
+                <div class="model-flow-diagram">
+                    <h3><i class="fa-solid fa-sitemap"></i> Network Pipeline Architecture:</h3>
+                    <div class="flow-chart">
+                        <div class="flow-node">
+                            <span class="node-title">Review Text Script</span>
+                            <span class="node-sub">Raw string</span>
+                        </div>
+                        <div class="flow-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="flow-node">
+                            <span class="node-title">TF-IDF Vector</span>
+                            <span class="node-sub">(Batch, 5000)</span>
+                        </div>
+                        <div class="flow-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="flow-node highlight">
+                            <span class="node-title">PyTorch SimpleRNN</span>
+                            <span class="node-sub">128 Hidden Units</span>
+                        </div>
+                        <div class="flow-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="flow-node">
+                            <span class="node-title">Linear Dense Layer</span>
+                            <span class="node-sub">128 -> 1</span>
+                        </div>
+                        <div class="flow-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="flow-node result">
+                            <span class="node-title">Sigmoid Output</span>
+                            <span class="node-sub">Verdict Probability</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>CinePulse Hollywood Studio • PyTorch SimpleRNN Sentiment Intelligence Engine • Trained on 50,000 IMDB Reviews</p>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="/static/app.js"></script>
+</body>
+</html>
