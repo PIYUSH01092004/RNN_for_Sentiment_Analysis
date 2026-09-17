@@ -16,9 +16,8 @@
 </p>
 
 <p align="center">
-  🚀 <b>Live Cloud Application (24/7):</b> <a href="https://cinepulse-rnn-sentiment.onrender.com" target="_blank">https://cinepulse-rnn-sentiment.onrender.com</a><br>
-  🌐 <b>Live API Documentation:</b> <a href="https://cinepulse-rnn-sentiment.onrender.com/docs" target="_blank">https://cinepulse-rnn-sentiment.onrender.com/docs</a><br>
-  💻 <b>Local Setup:</b> <a href="http://localhost:8000/" target="_blank">http://localhost:8000</a> <i>(requires running <code>python server.py</code> locally)</i>
+  🚀 <b>Live Web Application:</b> <a href="https://cinepulse-rnn-sentiment.onrender.com" target="_blank">https://cinepulse-rnn-sentiment.onrender.com</a><br>
+  🌐 <b>Live Interactive API Docs:</b> <a href="https://cinepulse-rnn-sentiment.onrender.com/docs" target="_blank">https://cinepulse-rnn-sentiment.onrender.com/docs</a>
 </p>
 
 [Key Features](#key-features) •
@@ -221,12 +220,10 @@ python server.py
 ```
 
 ### 5. Access the Web Dashboard
-- 🚀 **Live Production Application (24/7 Cloud)**: **[https://cinepulse-rnn-sentiment.onrender.com](https://cinepulse-rnn-sentiment.onrender.com)** *(No local setup required)*
+Open your web browser and navigate to:
+- 🚀 **Live Production Application**: **[https://cinepulse-rnn-sentiment.onrender.com](https://cinepulse-rnn-sentiment.onrender.com)**
 - 🌐 **Live Interactive API Docs**: **[https://cinepulse-rnn-sentiment.onrender.com/docs](https://cinepulse-rnn-sentiment.onrender.com/docs)**
-- 💻 **Local Development Dashboard**: **[http://localhost:8000](http://localhost:8000)** *(requires `python server.py` active in terminal)*
-
-> [!NOTE]
-> `http://localhost:8000` is a local loopback link. If you visit `localhost:8000` without running `python server.py` in your terminal first, your browser will show a `Connection Refused` error. Use the **Live Cloud Link** above for instant zero-setup access.
+- 💻 **Local Dashboard**: **[http://localhost:8000](http://localhost:8000)** *(available when `python server.py` is running)*
 
 ---
 
